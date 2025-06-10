@@ -9,3 +9,5 @@ def test_cadastro_produto_v():
 def test_cadastro_produto_i():
     resultado = cadastrar_produto("0", "X", 0, 0)
     assert isinstance(resultado, str)
+    
+# 1 failed, 1 passed in 0.36s
