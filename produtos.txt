@@ -1,0 +1,30 @@
+=== Produto Cadastrado ===
+Código: n2bd2
+Nome: Maça
+Preço: 12.0
+Estoque: 5
+
+=== Produto Cadastrado ===
+Código: bbbn12
+Nome: Pera
+Preço: 95.0
+Estoque: 2
+
+=== Produto Cadastrado ===
+Código: 1213
+Nome: Banna
+Preço: 12.0
+Estoque: 3
+
+=== Produto Cadastrado ===
+Código: 111
+Nome: Agua
+Preço: 42.0
+Estoque: 0
+
+=== Produto Cadastrado ===
+Código: teste123
+Nome: Uva
+Preço: 13.0
+Estoque: 2
+

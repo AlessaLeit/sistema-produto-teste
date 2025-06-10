@@ -1,24 +1,54 @@
-# produto.py
-
 def cadastrar_produto(codigo, nome, preco, estoque):
-    produto = {
+    return {
         "Código": codigo,
         "Nome": nome,
         "Preço": preco,
         "Estoque": estoque
     }
-    return produto
 
-# Função executável para usar manualmente
-if __name__ == "__main__":
-    print("=== Cadastro de Produto ===")
-    codigo = input("Digite o código do produto: ")
-    nome = input("Digite o nome do produto: ")
-    preco = float(input("Digite o preço do produto: "))
-    estoque = int(input("Digite a quantidade em estoque: "))
+def buscar_produto(termo_busca):
+    with open("produtos.txt", "r", encoding="utf-8") as arquivo:
+        produto_atual = []
+        for linha in arquivo:
+            if linha.strip() == "=== Produto Cadastrado ===":
+                if produto_atual:
+                    # Verifica se o termo está nesse produto
+                    texto_produto = "\n".join(produto_atual)
+                    if termo_busca.lower() in texto_produto.lower():
+                        print("\n=== Produto Encontrado ===")
+                        print(texto_produto)
+                    produto_atual = []  # limpa pra começar novo produto
+            elif linha.strip() != "":
+                produto_atual.append(linha.strip())
+        
+        # Verifica o último produto
+        if produto_atual:
+            texto_produto = "\n".join(produto_atual)
+            if termo_busca.lower() in texto_produto.lower():
+                print("\n=== Produto Encontrado ===")
+                print(texto_produto)
 
-    produto = cadastrar_produto(codigo, nome, preco, estoque)
+def codigo_existe(codigo_procurado):
+    try:
+        with open("produtos.txt", "r", encoding="utf-8") as arquivo:
+            for linha in arquivo:
+                if linha.strip().startswith("Código:"):
+                    codigo_lido = linha.strip().split(":")[1].strip()
+                    if codigo_lido == codigo_procurado:
+                        return True
+    except FileNotFoundError:
+        return False
+    return False
 
-    print("\nProduto cadastrado com sucesso:")
-    for chave, valor in produto.items():
-        print(f"{chave}: {valor}")
+def listar_produtos():
+    try:
+        with open("produtos.txt", "r", encoding="utf-8") as arquivo:
+            conteudo = arquivo.read().strip()
+            if conteudo:
+                print("\n==== Lista de Produtos ====")
+                print(conteudo)
+            else:
+                print("\nNenhum produto cadastrado ainda.")
+    except FileNotFoundError:
+        print("\nArquivo de produtos não encontrado.")
+
